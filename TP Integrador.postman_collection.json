@@ -1,0 +1,389 @@
+{
+	"info": {
+		"_postman_id": "04c2819e-c578-4d65-95f5-47deaf3a97c5",
+		"name": "TP Integrador",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "34150658"
+	},
+	"item": [
+		{
+			"name": "Alta usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "usuario",
+							"value": "Juan",
+							"type": "text"
+						},
+						{
+							"key": "clave",
+							"value": "456",
+							"type": "text"
+						},
+						{
+							"key": "tipo",
+							"value": "Socio",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/app/usuarios",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"app",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alta producto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "coca",
+							"type": "text"
+						},
+						{
+							"key": "precio",
+							"value": "100",
+							"type": "text"
+						},
+						{
+							"key": "tipo",
+							"value": "Bebida",
+							"type": "text"
+						},
+						{
+							"key": "tiempo_preparacion",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/app/productos",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"app",
+						"productos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar productos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "coca",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "precio",
+							"value": "100",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tipo",
+							"value": "Bebida",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tiempo_preparacion",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/app/productos",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"app",
+						"productos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar Usuarios",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "coca",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "precio",
+							"value": "100",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tipo",
+							"value": "Bebida",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tiempo_preparacion",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/app/usuarios",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"app",
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar pedidos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "coca",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "precio",
+							"value": "100",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tipo",
+							"value": "Bebida",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tiempo_preparacion",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/app/pedidos",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"app",
+						"pedidos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar mesas",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "nombre",
+							"value": "coca",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "precio",
+							"value": "100",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tipo",
+							"value": "Bebida",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "tiempo_preparacion",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/app/mesas",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"app",
+						"mesas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alta Pedido",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "mesa",
+							"value": "amvqd",
+							"type": "text"
+						},
+						{
+							"key": "producto[0]",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "cliente",
+							"value": "john",
+							"type": "text"
+						},
+						{
+							"key": "cantidad[0]",
+							"value": "3",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/app/pedidos",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"app",
+						"pedidos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alta Mesa",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "mesa",
+							"value": "amvqd",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "producto[0]",
+							"value": "1",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "cliente",
+							"value": "john",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "cantidad[0]",
+							"value": "3",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:666/app/mesas",
+					"host": [
+						"localhost"
+					],
+					"port": "666",
+					"path": [
+						"app",
+						"mesas"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
