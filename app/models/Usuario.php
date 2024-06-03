@@ -1,6 +1,6 @@
-<?
+<?php
 
-require_once "./app/db/AccesoDatos.php";
+require_once "./db/AccesoDatos.php";
 class Usuario
 {
     public $id;
@@ -8,7 +8,7 @@ class Usuario
     public $clave;
     public $tipo;
 
-    public function __construct(int $id, string $usuario, string $clave)
+    public function __construct(string $usuario, string $clave, $id = "")
     {
         $this->id = $id;
         $this->usuario = $usuario;
@@ -39,8 +39,32 @@ class Usuario
         }
 
         $consulta->execute();
+        $lista = $consulta->fetchAll(PDO::FETCH_ASSOC);
+        $usr = array();
+        foreach ($lista as $usuario) {
+            switch ($usuario['tipo']) {
+                case "Mozo":
+                    $usr[] = new Mozo($usuario['usuario'], $usuario['clave'], $usuario['id']);
+                    break;
+                case "Socio":
+                    $usr[] = new Socio($usuario['usuario'], $usuario['clave'], $usuario['id']);
+                    break;
+                case "Bartender":
+                    $usr[] = new Bartender($usuario['usuario'], $usuario['clave'], $usuario['id']);
+                    break;
+                case "Cervecero":
+                    $usr[] = new Cervecero($usuario['usuario'], $usuario['clave'], $usuario['id']);
+                    break;
+                case "Cocinero":
+                    $usr[] = new Cocinero($usuario['usuario'], $usuario['clave'], $usuario['id']);
+                    break;
+                default:
+                    break;
+            }
+        }
 
-        return $consulta->fetchAll(PDO::FETCH_CLASS, 'Usuario');
+        return $usr;
+
     }
 
     public static function obtenerUsuarioPorNombre($usuario)
@@ -54,15 +78,15 @@ class Usuario
         if ($retorno) {
             switch ($retorno['tipo']) {
                 case "Mozo":
-                    return new Mozo($retorno['id'], $retorno['usuario'], $retorno['clave']);
+                    return new Mozo($retorno['usuario'], $retorno['clave']);
                 case "Socio":
-                    return new Socio($retorno['id'], $retorno['usuario'], $retorno['clave']);
+                    return new Socio($retorno['usuario'], $retorno['clave']);
                 case "Bartender":
-                    return new Bartender($retorno['id'], $retorno['usuario'], $retorno['clave']);
+                    return new Bartender($retorno['usuario'], $retorno['clave']);
                 case "Cervecero":
-                    return new Cervecero($retorno['id'], $retorno['usuario'], $retorno['clave']);
+                    return new Cervecero($retorno['usuario'], $retorno['clave']);
                 case "Cocinero":
-                    return new Cocinero($retorno['id'], $retorno['usuario'], $retorno['clave']);
+                    return new Cocinero($retorno['usuario'], $retorno['clave']);
             }
         }
     }
@@ -90,9 +114,9 @@ class Usuario
 
 class Mozo extends Usuario
 {
-    public function __construct(int $id, string $usuario, string $clave)
+    public function __construct(string $usuario, string $clave, $id = "")
     {
-        parent::__construct($id, $usuario, $clave);
+        parent::__construct($usuario, $clave, $id);
         $this->tipo = "Mozo";
     }
 
@@ -103,9 +127,9 @@ class Mozo extends Usuario
 }
 class Socio extends Usuario
 {
-    public function __construct(int $id, string $usuario, string $clave)
+    public function __construct(string $usuario, string $clave, $id = "")
     {
-        parent::__construct($id, $usuario, $clave);
+        parent::__construct($usuario, $clave, $id);
         $this->tipo = "Socio";
     }
 
@@ -116,9 +140,9 @@ class Socio extends Usuario
 }
 class Bartender extends Usuario
 {
-    public function __construct(int $id, string $usuario, string $clave)
+    public function __construct(string $usuario, string $clave, $id = "")
     {
-        parent::__construct($id, $usuario, $clave);
+        parent::__construct($usuario, $clave, $id);
         $this->tipo = "Bartender";
     }
 
@@ -129,9 +153,9 @@ class Bartender extends Usuario
 }
 class Cocinero extends Usuario
 {
-    public function __construct(int $id, string $usuario, string $clave)
+    public function __construct(string $usuario, string $clave, $id = "")
     {
-        parent::__construct($id, $usuario, $clave);
+        parent::__construct($usuario, $clave, $id);
         $this->tipo = "Cocinero";
     }
 
@@ -142,9 +166,9 @@ class Cocinero extends Usuario
 }
 class Cervecero extends Usuario
 {
-    public function __construct(int $id, string $usuario, string $clave)
+    public function __construct(string $usuario, string $clave, $id = "")
     {
-        parent::__construct($id, $usuario, $clave);
+        parent::__construct($usuario, $clave, $id);
         $this->tipo = "Cervecero";
     }
 
