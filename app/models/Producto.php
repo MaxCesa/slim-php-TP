@@ -11,9 +11,8 @@ class Producto
     public function crearProducto()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO productos (nombre,precio,tipo,tiempo_preparacion) VALUES (:nombre,:precio,:tipo,:tiempo_preparacion)");
+        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO productos (nombre,precio,tipo) VALUES (:nombre,:precio,:tipo)");
         $consulta->bindValue(':nombre', $this->nombre, PDO::PARAM_STR);
-        $consulta->bindValue(':tiempo_preparacion', $this->tiempo_preparacion, PDO::PARAM_STR);
         $consulta->bindValue(':precio', $this->precio, PDO::PARAM_INT);
         $consulta->bindValue(':tipo', $this->tipo, PDO::PARAM_INT);
         $consulta->execute();
@@ -28,12 +27,13 @@ class Producto
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Producto');
     }
 
-    public static function ObtenerDemoraDefault($id)
+    public static function ObtenerSector($id)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT tiempo_preparacion FROM productos WHERE id = :id");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT tipo FROM productos WHERE id = :id");
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);
         $consulta->execute();
         return $consulta->fetch(PDO::FETCH_ASSOC);
     }
+
 }

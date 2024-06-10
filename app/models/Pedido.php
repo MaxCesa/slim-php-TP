@@ -49,16 +49,15 @@ class Pedido
         return $objAccesoDatos->obtenerUltimoId();
     }
 
-    public function crearItemPedido($pedido, $producto, $cantidad)
+    public function crearItemPedido($pedido, $producto, $tiempo_estimado)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $demora = Producto::ObtenerDemoraDefault($producto);
-        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO productos_pedidos (id_pedido,id_producto,cantidad) VALUES (:id_pedido,:producto_id,:cantidad)");
+        $consulta = $objAccesoDatos->prepararConsulta("INSERT INTO productos_pedidos (id_pedido,id_producto,id_usuario,tiempo_estimado) VALUES (:id_pedido,:producto_id,:id_usuario,:tiempo_estimado)");
         $consulta->bindValue(':id_pedido', $pedido, PDO::PARAM_INT);
         $consulta->bindValue(':producto_id', $producto, PDO::PARAM_INT);
-        $consulta->bindValue(':cantidad', $cantidad, PDO::PARAM_STR);
+        $consulta->bindValue(':id_usuario', Usuario::ObtenerMasLibre(Producto::ObtenerSector($producto))['empleado_libre'], PDO::PARAM_INT);
         //$consulta->bindValue(':estado', 0, PDO::PARAM_INT);
-        //$consulta->bindValue(':prep_time', $demora['prep_time_default'], PDO::PARAM_INT);
+        $consulta->bindValue(':tiempo_estimado', $tiempo_estimado, PDO::PARAM_INT);
         $consulta->execute();
         return $objAccesoDatos->obtenerUltimoId();
     }
@@ -72,7 +71,6 @@ class Pedido
         $pedidos = $consulta->fetchAll(PDO::FETCH_CLASS, 'Pedido');
         foreach ($pedidos as $key => $value) {
             $value->estado = Pedido::ObtenerPedidoState($value->id)['estado'];
-            $value->demora = Pedido::GetDemora($value->mesa_id, $value->codigo);
         }
         return $pedidos;
     }
@@ -139,17 +137,48 @@ class Pedido
     }
 
 
-    public static function GetDemora($nro_mesa, $nro_pedido)
+    public static function SetPedidoListo($nro_pedido)
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
         $id = Pedido::obtenerIdSegunCodigo($nro_pedido);
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT MAX(tiempo_preparacion) FROM `productos`
-        RIGHT JOIN productos_pedidos ON productos_pedidos.id_producto = productos.id 
-        WHERE `id_pedido` = :nro_pedido");
-        $consulta->bindValue(':nro_pedido', $id['id'], PDO::PARAM_INT);
+        $consulta = $objAccesoDatos->prepararConsulta("UPDATE estado FROM `pedidos` SET estado = 'Listo para servir'
+        WHERE `id_pedido` = :id_pedido");
+        $consulta->bindValue(':id_pedido', $id['id'], PDO::PARAM_INT);
         $consulta->execute();
-        var_dump($consulta->fetch(PDO::FETCH_ASSOC));
         return $consulta->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function GetEstadoPedido($nro_pedido)
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT estado FROM `pedidos`
+        WHERE `codigo` = :id_pedido");
+        $consulta->bindValue(":nro_pedido", $nro_pedido);
+        $consulta->execute();
+        return $consulta->fetch(PDO::FETCH_ASSOC)['estado'];
+    }
+
+    public static function GetEstadoProductosPedidos($nro_pedido)
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $id = Pedido::obtenerIdSegunCodigo($nro_pedido);
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT * FROM `productos_pedidos`
+        WHERE `id_pedido` = :id_pedido");
+        $consulta->bindValue(':id_pedido', $id['id'], PDO::PARAM_INT);
+        $consulta->execute();
+        return $consulta->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public static function SetProductoPedidoListo($id_producto, $nro_pedido)
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $id = Pedido::obtenerIdSegunCodigo($nro_pedido);
+        $consulta = $objAccesoDatos->prepararConsulta("UPDATE estado FROM `productos_pedidos` SET estado = 'Listo'
+        WHERE `id_pedido` = :id_pedido AND 'id_producto' = :id_producto AND 'estado' = 'En preparacion'");
+        $consulta->bindValue(':id_pedido', $id['id'], PDO::PARAM_INT);
+        $consulta->bindValue('id_producto', $id_producto, PDO::PARAM_INT);
+        $consulta->execute();
     }
 
 

@@ -13,6 +13,7 @@ require_once './controllers/UsuarioController.php';
 require_once './controllers/MesaController.php';
 require_once './controllers/ProductoController.php';
 require_once './controllers/PedidoController.php';
+require_once './middleware/UserMiddleware.php';
 
 // Instantiate App
 $app = AppFactory::create();
@@ -28,22 +29,22 @@ $app->addBodyParsingMiddleware();
 // Routes
 $app->group('/usuarios', function (RouteCollectorProxy $group) {
 	$group->get('[/]', \UsuarioController::class . ':TraerTodos');
-	$group->post('[/]', \UsuarioController::class . ':CargarUno');
+	$group->post('[/]', \UsuarioController::class . ':CargarUno')->add(\UserMiddleware::class . ':ValidarSocio');
 });
 
 $app->group('/mesas', function (RouteCollectorProxy $group) {
 	$group->get('[/]', \MesaController::class . ':TraerTodos');
-	$group->post('[/]', \MesaController::class . ':CargarUno');
+	$group->post('[/]', \MesaController::class . ':CargarUno')->add(\UserMiddleware::class . ':ValidarSocio');
 });
 
 $app->group('/productos', function (RouteCollectorProxy $group) {
 	$group->get('[/]', \ProductoController::class . ':TraerTodos');
-	$group->post('[/]', \ProductoController::class . ':CargarUno');
+	$group->post('[/]', \ProductoController::class . ':CargarUno')->add(\UserMiddleware::class . ':ValidarSocio');
 });
 
 $app->group('/pedidos', function (RouteCollectorProxy $group) {
 	$group->get('[/]', \PedidoController::class . ':TraerTodos');
-	$group->post('[/]', \PedidoController::class . ':CargarUno');
+	$group->post('[/]', \PedidoController::class . ':CargarUno')->add(\UserMiddleware::class . ':ValidarMozo');
 });
 
 $app->run();

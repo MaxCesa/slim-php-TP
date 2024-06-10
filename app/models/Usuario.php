@@ -110,6 +110,52 @@ class Usuario
         $consulta->bindValue(':fechaBaja', date_format($fecha, 'Y-m-d H:i:s'));
         $consulta->execute();
     }
+
+    public static function ObtenerMasLibre($tipo)
+    {
+        $objAccesoDato = AccesoDatos::obtenerInstancia();
+        switch ($tipo) {
+            case "Comida":
+                $consulta = $objAccesoDato->prepararConsulta(
+                    "SELECT u.id, COUNT(o.estado) AS empleado_libre
+                    FROM usuarios u
+                    LEFT JOIN orders o ON u.id = o.id_usuario AND o.estado = 'En preparacion'
+                    WHERE u.tipo = 'Cocinero'
+                    GROUP BY u.id
+                    ORDER BY empleado_libre ASC
+                    LIMIT 1;"
+                );
+                break;
+            case "Cerveza":
+                $consulta = $objAccesoDato->prepararConsulta(
+                    "SELECT u.id, COUNT(o.estado) AS empleado_libre
+                    FROM usuarios u
+                    LEFT JOIN orders o ON u.id = o.id_usuario AND o.estado = 'En preparacion'
+                    WHERE u.tipo = 'Cervecero'
+                    GROUP BY u.id
+                    ORDER BY empleado_libre ASC
+                    LIMIT 1;"
+                );
+                break;
+            case "Trago":
+                $consulta = $objAccesoDato->prepararConsulta(
+                    "SELECT u.id, COUNT(o.estado) AS empleado_libre
+                    FROM usuarios u
+                    LEFT JOIN orders o ON u.id = o.id_usuario AND o.estado = 'En preparacion'
+                    WHERE u.tipo = 'Bartender'
+                    GROUP BY u.id
+                    ORDER BY empleado_libre ASC
+                    LIMIT 1;"
+                );
+                break;
+            default:
+                $consulta = $objAccesoDato->prepararConsulta("SELECT * FROM usuario WHERE FALSE");
+                break;
+        }
+        $consulta->execute();
+        return $consulta->fetch(PDO::FETCH_ASSOC);
+
+    }
 }
 
 class Mozo extends Usuario

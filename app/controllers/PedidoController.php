@@ -26,7 +26,7 @@ class PedidoController extends Pedido implements IApiUsable
       }
       $pedido_id = $pedido->crearPedido();
       foreach ($parametros['producto'] as $key => $producto) {
-        $item = Pedido::crearItemPedido($pedido_id, $producto, $parametros['cantidad'][$key]);
+        $item = Pedido::crearItemPedido($pedido_id, $producto, $parametros['tiempo_estimado'][$key]);
       }
       Mesa::cambiarEstadoMesa($parametros['mesa'], 1);
       $payload = json_encode(array("mensaje" => "Pedido creado con exito, Su código de pedido es: " . $pedido->codigo));
