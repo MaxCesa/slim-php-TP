@@ -47,4 +47,9 @@ $app->group('/pedidos', function (RouteCollectorProxy $group) {
 	$group->post('[/]', \PedidoController::class . ':CargarUno')->add(\UserMiddleware::class . ':ValidarMozo');
 });
 
+$app->group('/csv', function (RouteCollectorProxy $group) {
+	$group->post('[/]', \ProductoController::class . ':GuardarProductos');
+	$group->put('[/]', \ProductoController::class . ':CargarProductos');
+});
+
 $app->run();

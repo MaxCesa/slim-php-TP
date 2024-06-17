@@ -6,7 +6,7 @@ class Producto
     public $nombre;
     public $precio;
     public $tipo;
-    public $tiempo_preparacion;
+
 
     public function crearProducto()
     {
@@ -22,18 +22,92 @@ class Producto
     public static function obtenerTodos()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, nombre, precio, tipo,tiempo_preparacion FROM productos");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT id, nombre, precio, tipo FROM productos");
         $consulta->execute();
         return $consulta->fetchAll(PDO::FETCH_CLASS, 'Producto');
     }
 
     public static function ObtenerSector($id)
     {
-        $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT tipo FROM productos WHERE id = :id");
+        $pdo = AccesoDatos::obtenerInstancia();
+        $consulta = $pdo->prepararConsulta("SELECT tipo FROM productos WHERE id = :id");
         $consulta->bindValue(':id', $id, PDO::PARAM_INT);
         $consulta->execute();
         return $consulta->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public static function GuardarProductosCSV()
+    {
+        $datos = Producto::obtenerTodos();
+
+        $file = fopen("./csv/productos.csv", 'w');
+
+        $propiedades = array_keys(get_object_vars($datos[0]));
+        fputcsv($file, $propiedades);
+
+        foreach ($datos as $producto) {
+            $row = [];
+            foreach ($propiedades as $propiedad) {
+                $row[] = $producto->$propiedad;
+            }
+            fputcsv($file, $row);
+        }
+        return $datos;
+    }
+
+    public static function actualizarProducto(Producto $producto)
+    {
+        $pdo = AccesoDatos::obtenerInstancia();
+        $consulta = $pdo->prepararConsulta("REPLACE INTO productos (id,nombre,precio,tipo)
+                                            VALUES (:id,:nombre,:precio,:tipo);");
+        $consulta->bindValue(":nombre", $producto->nombre);
+        $consulta->bindValue(":precio", $producto->precio);
+        $consulta->bindValue(":tipo", $producto->tipo);
+        $consulta->bindValue(":id", $producto->id);
+        $consulta->execute();
+    }
+
+    public static function actualizarSQLconCSV()
+    {
+        $productos = [];
+
+        try {
+            // Open the CSV file for reading
+            $file = fopen(".\csv\productos.csv", 'r');
+            if ($file === false) {
+                throw new Exception("No se pudo abrir el archivo: .\csv\productos.csv");
+            }
+
+            // Read the column headers
+            $propiedades = fgetcsv($file);
+            if ($propiedades === false) {
+                throw new Exception("No se pudo leer la primera fila.");
+            }
+
+            while (($fila = fgetcsv($file)) !== false) {
+                $datos = array_combine($propiedades, $fila);
+
+                $producto = new Producto();
+                $producto->id = $datos['id'];
+                $producto->nombre = $datos['nombre'];
+                $producto->precio = $datos['precio'];
+                $producto->tipo = $datos['tipo'];
+
+
+                $productos[] = $producto;
+            }
+
+            foreach ($productos as $producto) {
+                Producto::actualizarProducto($producto);
+            }
+
+            fclose($file);
+
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+        }
+
+        return $productos;
     }
 
 }

@@ -11,14 +11,12 @@ class ProductoController extends Producto
     if (
       isset($parametros['nombre']) && $parametros['nombre'] != "" &&
       isset($parametros['precio']) && $parametros['precio'] != "" &&
-      isset($parametros['tiempo_preparacion']) && $parametros['tiempo_preparacion'] != "" &&
-      ($parametros['tipo'] == "Comida" || $parametros['tipo'] == "Bebida")
+      ($parametros['tipo'] == "Comida" || $parametros['tipo'] == "Cerveza" || $parametros['tipo'] = "Trago")
     ) {
       $producto = new Producto();
-      $producto->nombre = $parametros['nombre'];
-      $producto->precio = $parametros['precio'];
-      $producto->tipo = $parametros['tipo'];
-      $producto->tiempo_preparacion = $parametros['tiempo_preparacion'];
+      $producto = $parametros['nombre'];
+      $producto = $parametros['precio'];
+      $producto = $parametros['tipo'];
       $producto->crearProducto();
       $payload = json_encode(array("mensaje" => "Producto creado con exito"));
       $response->getBody()->write($payload);
@@ -35,6 +33,26 @@ class ProductoController extends Producto
   public function TraerTodos($request, $response, $args)
   {
     $lista = Producto::obtenerTodos();
+    $payload = json_encode(array("listaProductos" => $lista));
+
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  }
+
+  public function GuardarProductos($request, $response, $args)
+  {
+    $lista = Producto::GuardarProductosCSV();
+    $payload = json_encode(array("listaProductos" => $lista));
+
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+  }
+
+  public function CargarProductos($request, $response, $args)
+  {
+    $lista = Producto::actualizarSQLconCSV();
     $payload = json_encode(array("listaProductos" => $lista));
 
     $response->getBody()->write($payload);
