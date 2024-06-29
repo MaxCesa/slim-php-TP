@@ -14,6 +14,10 @@ require_once './controllers/MesaController.php';
 require_once './controllers/ProductoController.php';
 require_once './controllers/PedidoController.php';
 require_once './middleware/UserMiddleware.php';
+require_once './controllers/LoggerController.php';
+
+
+session_start();
 
 // Instantiate App
 $app = AppFactory::create();
@@ -51,5 +55,8 @@ $app->group('/csv', function (RouteCollectorProxy $group) {
 	$group->post('[/]', \ProductoController::class . ':GuardarProductos');
 	$group->put('[/]', \ProductoController::class . ':CargarProductos');
 });
+
+$app->post('/login', \LoggerController::class . ':LogIn');
+$app->post('/logout', \LoggerController::class . ':LogOut');
 
 $app->run();

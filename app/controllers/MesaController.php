@@ -8,7 +8,7 @@ class MesaController
   {
     $mesa = new Mesa(substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 5)), 0, 5), "Con cliente esperando pedido");
     $mesa->crearMesa();
-    $payload = json_encode(array("mensaje" => "Mesa creada con exito, su numero es: " . $mesa->code));
+    $payload = json_encode(array("mensaje" => "Mesa creada con exito, su numero es: " . $mesa->codigo));
     $response->getBody()->write($payload);
     return $response
       ->withHeader('Content-Type', 'application/json');
