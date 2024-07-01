@@ -40,7 +40,6 @@ class UserMiddleware
         try {
             $decoded = Token::DecodificarToken($token);
             if ($decoded['Payload']->tipo == "Mozo" || $decoded['Payload']->tipo == "Socio") {
-                var_dump($decoded);
                 $response = $handler->handle($request);
             } else {
                 throw new Exception("Error en la decodificacion de TOKEN");

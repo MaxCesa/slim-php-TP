@@ -7,6 +7,1825 @@
 	},
 	"item": [
 		{
+			"name": "Correccion Paso a Paso",
+			"item": [
+				{
+					"name": "1 - Alta Pedido",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Agus\",\r\n    \"id\": 3,\r\n    \"tipo\": \"Mozo\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "mesa",
+									"value": "amvqd",
+									"type": "text"
+								},
+								{
+									"key": "producto[0]",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "cliente",
+									"value": "Joaquin",
+									"type": "text"
+								},
+								{
+									"key": "producto[1]",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "producto[2]",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "producto[3]",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "producto[4]",
+									"value": "7",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:666/app/pedidos",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2 - Foto Pedido",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Agus\",\r\n    \"id\": 3,\r\n    \"tipo\": \"Mozo\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nro_pedido",
+									"value": "{{nro_pedido}}",
+									"type": "text"
+								},
+								{
+									"key": "foto",
+									"type": "file",
+									"src": "/D:/Downloads/cliente.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:666/app/pedidos/adjuntar",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos",
+								"adjuntar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3 - Pedidos Pendientes Cervecero",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Guido\",\r\n    \"id\": 9,\r\n    \"tipo\": \"Cervecero\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:666/app/pedidos/pendientes",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos",
+								"pendientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3 - Pedidos Pendientes Cocinero",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Ernesto\",\r\n    \"id\": 7,\r\n    \"tipo\": \"Cocinero\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:666/app/pedidos/pendientes",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos",
+								"pendientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3 - Pedidos Pendientes Bartender",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Carla\",\r\n    \"id\": 5,\r\n    \"tipo\": \"Bartender\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:666/app/pedidos/pendientes",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos",
+								"pendientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3 - Iniciar Preparacion Milanesa",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Ernesto\",\r\n    \"id\": 7,\r\n    \"tipo\": \"Cocinero\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nro_pedido",
+									"value": "{{nro_pedido}}",
+									"type": "text"
+								},
+								{
+									"key": "item_id",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "prep_time",
+									"value": "15",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:666/app/pedidos/iniciar",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos",
+								"iniciar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3 - Iniciar Preparacion Hamburguesa",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Ernesto\",\r\n    \"id\": 7,\r\n    \"tipo\": \"Cocinero\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nro_pedido",
+									"value": "{{nro_pedido}}",
+									"type": "text"
+								},
+								{
+									"key": "item_id",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "prep_time",
+									"value": "15",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:666/app/pedidos/iniciar",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos",
+								"iniciar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3 - Iniciar Preparacion Corona",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Guido\",\r\n    \"id\": 9,\r\n    \"tipo\": \"Cervecero\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nro_pedido",
+									"value": "{{nro_pedido}}",
+									"type": "text"
+								},
+								{
+									"key": "item_id",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "prep_time",
+									"value": "15",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:666/app/pedidos/iniciar",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos",
+								"iniciar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3 - Iniciar Preparacion DAikiri",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Carla\",\r\n    \"id\": 5,\r\n    \"tipo\": \"Bartender\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nro_pedido",
+									"value": "{{nro_pedido}}",
+									"type": "text"
+								},
+								{
+									"key": "item_id",
+									"value": "7",
+									"type": "text"
+								},
+								{
+									"key": "prep_time",
+									"value": "15",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:666/app/pedidos/iniciar",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos",
+								"iniciar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4 - Obtener Demora",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:666/app/pedidos/demora?nro_pedido={{nro_pedido}}",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos",
+								"demora"
+							],
+							"query": [
+								{
+									"key": "nro_pedido",
+									"value": "{{nro_pedido}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5 - Listar Pedidos y Demoras",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Maxi\",\r\n    \"id\": 1,\r\n    \"tipo\": \"Socio\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:666/app/pedidos",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5 - Obtener Demora",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Maxi\",\r\n    \"id\": 1,\r\n    \"tipo\": \"Socio\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:666/app/pedidos/demora?nro_pedido={{nro_pedido}}",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos",
+								"demora"
+							],
+							"query": [
+								{
+									"key": "nro_pedido",
+									"value": "{{nro_pedido}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6 - Marcar como Listo Milanesa",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Ernesto\",\r\n    \"id\": 7,\r\n    \"tipo\": \"Cocinero\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nro_pedido",
+									"value": "{{nro_pedido}}",
+									"type": "text"
+								},
+								{
+									"key": "item_id",
+									"value": "4",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:666/app/pedidos/listo",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos",
+								"listo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6 - Marcar como Listo Hamburguesa",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Ernesto\",\r\n    \"id\": 7,\r\n    \"tipo\": \"Cocinero\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nro_pedido",
+									"value": "{{nro_pedido}}",
+									"type": "text"
+								},
+								{
+									"key": "item_id",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:666/app/pedidos/listo",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos",
+								"listo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6 - Marcar como Listo Corona",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Guido\",\r\n    \"id\": 9,\r\n    \"tipo\": \"Cervecero\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nro_pedido",
+									"value": "{{nro_pedido}}",
+									"type": "text"
+								},
+								{
+									"key": "item_id",
+									"value": "6",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:666/app/pedidos/listo",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos",
+								"listo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "6 - Marcar como Listo Copy 3",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Carla\",\r\n    \"id\": 5,\r\n    \"tipo\": \"Bartender\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "nro_pedido",
+									"value": "{{nro_pedido}}",
+									"type": "text"
+								},
+								{
+									"key": "item_id",
+									"value": "7",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:666/app/pedidos/listo",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos",
+								"listo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7 - Ver Pedidos Listos",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Agus\",\r\n    \"id\": 3,\r\n    \"tipo\": \"Mozo\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:666/app/pedidos/listo",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos",
+								"listo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "7 - Entregar Pedido",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Agus\",\r\n    \"id\": 3,\r\n    \"tipo\": \"Mozo\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "codigo",
+									"value": "amvqd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:666/app/pedidos/entregar",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos",
+								"entregar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "8- Listar mesas",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Maxi\",\r\n    \"id\": 1,\r\n    \"tipo\": \"Socio\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:666/app/mesas",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"mesas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "9 - Obtener Total Cuenta",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Agus\",\r\n    \"id\": 3,\r\n    \"tipo\": \"Mozo\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:666/app/pedidos/cuenta?nro_pedido={{nro_pedido}}",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"pedidos",
+								"cuenta"
+							],
+							"query": [
+								{
+									"key": "nro_pedido",
+									"value": "{{nro_pedido}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "10 - Cerrar Mesa",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Maxi\",\r\n    \"id\": 1,\r\n    \"tipo\": \"Socio\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "codigo",
+									"value": "amvqd",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:666/app/mesas/cerrar",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"mesas",
+								"cerrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "11 - Cargar Encuesta",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "puntuacion_mesa",
+									"value": "4",
+									"type": "text"
+								},
+								{
+									"key": "puntuacion_mozo",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "puntuacion_restaurante",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "puntuacion_cocinero",
+									"value": "6",
+									"type": "text"
+								},
+								{
+									"key": "nro_mesa",
+									"value": "amvqd",
+									"type": "text"
+								},
+								{
+									"key": "nro_pedido",
+									"value": "{{nro_pedido}}",
+									"type": "text"
+								},
+								{
+									"key": "comentario",
+									"value": "Funca",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "localhost:666/app/encuesta",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"encuesta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "12 - Mejor Comentario",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Maxi\",\r\n    \"id\": 1,\r\n    \"tipo\": \"Socio\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:666/app/encuesta",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"encuesta"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "13 - Mesa mas popular",
+					"request": {
+						"auth": {
+							"type": "jwt",
+							"jwt": [
+								{
+									"key": "payload",
+									"value": "{\r\n    \"iat\": \"{{ahora}}\",\r\n    \"nbf\": \"{{antes}}\",\r\n    \"exp\": \"{{despues}}\",\r\n    \"usuario\": \"Maxi\",\r\n    \"id\": 1,\r\n    \"tipo\": \"Socio\"\r\n}",
+									"type": "string"
+								},
+								{
+									"key": "secret",
+									"value": "milanapoconpapas",
+									"type": "string"
+								},
+								{
+									"key": "algorithm",
+									"value": "HS256",
+									"type": "string"
+								},
+								{
+									"key": "isSecretBase64Encoded",
+									"value": false,
+									"type": "boolean"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "headerPrefix",
+									"value": "Bearer",
+									"type": "string"
+								},
+								{
+									"key": "queryParamKey",
+									"value": "token",
+									"type": "string"
+								},
+								{
+									"key": "header",
+									"value": "{}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:666/app/mesas/popular",
+							"host": [
+								"localhost"
+							],
+							"port": "666",
+							"path": [
+								"app",
+								"mesas",
+								"popular"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"pm.globals.set(\"ahora\", (Math.trunc((new Date().getTime() / 1000))));\r",
+							"pm.globals.set(\"despues\", (Math.trunc((new Date().getTime() / 1000) + 3600)));\r",
+							"pm.globals.set(\"antes\", (Math.trunc((new Date().getTime() / 1000)) - 10));\r",
+							"\r",
+							"pm.globals.set(\"nro_pedido\", \"43vre\");\r",
+							"\r",
+							"pm.globals.set(\"Mozo\", \r",
+							"{\r",
+							"    \"iat\": \"{{ahora}}\",\r",
+							"    \"nbf\": \"{{antes}}\",\r",
+							"    \"exp\": \"{{despues}}\",\r",
+							"    \"usuario\": \"Agus\",\r",
+							"    \"id\": 3,\r",
+							"    \"tipo\": \"Mozo\"\r",
+							"});\r",
+							"\r",
+							"pm.globals.set(\"Socio\", \r",
+							"{\r",
+							"    \"iat\": \"{{ahora}}\",\r",
+							"    \"nbf\": \"{{antes}}\",\r",
+							"    \"exp\": \"{{despues}}\",\r",
+							"    \"usuario\": \"Maxi\",\r",
+							"    \"id\": 1,\r",
+							"    \"tipo\": \"Socio\"\r",
+							"});\r",
+							"\r",
+							"pm.globals.set(\"Cocinero\", \r",
+							"{\r",
+							"    \"iat\": \"{{ahora}}\",\r",
+							"    \"nbf\": \"{{antes}}\",\r",
+							"    \"exp\": \"{{despues}}\",\r",
+							"    \"usuario\": \"Ernesto\",\r",
+							"    \"id\": 7,\r",
+							"    \"tipo\": \"Cocinero\"\r",
+							"});\r",
+							"\r",
+							"pm.globals.set(\"Bartender\", \r",
+							"{\r",
+							"    \"iat\": \"{{ahora}}\",\r",
+							"    \"nbf\": \"{{antes}}\",\r",
+							"    \"exp\": \"{{despues}}\",\r",
+							"    \"usuario\": \"Carla\",\r",
+							"    \"id\": 5,\r",
+							"    \"tipo\": \"Bartender\"\r",
+							"});\r",
+							"\r",
+							"pm.globals.set(\"Cervecero\", \r",
+							"{\r",
+							"    \"iat\": \"{{ahora}}\",\r",
+							"    \"nbf\": \"{{antes}}\",\r",
+							"    \"exp\": \"{{despues}}\",\r",
+							"    \"usuario\": \"Guido\",\r",
+							"    \"id\": 9,\r",
+							"    \"tipo\": \"Cervecero\"\r",
+							"});"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
 			"name": "Alta usuario",
 			"request": {
 				"method": "POST",
@@ -55,28 +1874,35 @@
 					"formdata": [
 						{
 							"key": "nombre",
-							"value": "coca",
+							"value": "Sanguche de milanesa",
 							"type": "text"
 						},
 						{
 							"key": "precio",
-							"value": "100",
+							"value": "4000",
 							"type": "text"
 						},
 						{
 							"key": "tipo",
-							"value": "Bebida",
+							"value": "Comida",
 							"type": "text"
 						},
 						{
 							"key": "tiempo_preparacion",
 							"value": "1",
-							"type": "text"
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
 						}
 					]
 				},
 				"url": {
-					"raw": "localhost:666/app/productos",
+					"raw": "localhost:666/app/productos?sector=Socio",
 					"host": [
 						"localhost"
 					],
@@ -84,6 +1910,12 @@
 					"path": [
 						"app",
 						"productos"
+					],
+					"query": [
+						{
+							"key": "sector",
+							"value": "Socio"
+						}
 					]
 				}
 			},
@@ -288,50 +2120,6 @@
 					"path": [
 						"app",
 						"mesas"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Alta Pedido",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "formdata",
-					"formdata": [
-						{
-							"key": "mesa",
-							"value": "amvqd",
-							"type": "text"
-						},
-						{
-							"key": "producto[0]",
-							"value": "1",
-							"type": "text"
-						},
-						{
-							"key": "cliente",
-							"value": "john",
-							"type": "text"
-						},
-						{
-							"key": "cantidad[0]",
-							"value": "3",
-							"type": "text"
-						}
-					]
-				},
-				"url": {
-					"raw": "localhost:666/app/pedidos",
-					"host": [
-						"localhost"
-					],
-					"port": "666",
-					"path": [
-						"app",
-						"pedidos"
 					]
 				}
 			},

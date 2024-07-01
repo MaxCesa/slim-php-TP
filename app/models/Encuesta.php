@@ -29,7 +29,8 @@ class Encuesta
     public static function obtenerMejorComentario()
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
-        $consulta = $objAccesoDatos->prepararConsulta("SELECT comentario  FROM encuestas ORDER BY (puntuacion_mesa+puntuacion_mozo+puntuacion_restaurante+puntuacion_cocinero)/4 DESC LIMIT 1;");
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT comentario  FROM encuestas
+                                                        ORDER BY (puntuacion_mesa+puntuacion_mozo+puntuacion_restaurante+puntuacion_cocinero)/4 DESC LIMIT 1;");
         $consulta->execute();
         return $consulta->fetch()['comentario'];
     }

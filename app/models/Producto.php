@@ -135,7 +135,6 @@ class Producto
                 }
                 break;
         }
-        var_dump($retorno);
         return $retorno;
     }
 

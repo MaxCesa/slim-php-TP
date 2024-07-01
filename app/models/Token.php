@@ -73,7 +73,6 @@ class Token
         $token = trim(explode("Bearer", $header)[1]);
         $decode = Token::DecodificarToken($token);
         if ($decode['Mensaje'] == "OK") {
-            var_dump($decode);
             $retorno = $decode['Payload']->id;
         }
         return $retorno;

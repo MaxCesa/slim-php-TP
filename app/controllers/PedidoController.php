@@ -16,7 +16,6 @@ class PedidoController extends Pedido implements IApiUsable
       $pedido = new Pedido();
       $pedido->cliente = $parametros['cliente'];
       $mesa_id = Mesa::obtenerIdSegunCodigo($parametros['mesa']);
-      var_dump($mesa_id);
       $pedido->mesa_id = $mesa_id['id'];
       $pedido->codigo = substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 5)), 0, 5);
       if (isset($_FILES['foto'])) {
@@ -24,7 +23,6 @@ class PedidoController extends Pedido implements IApiUsable
         Pedido::SubirFotoPedido($_FILES['foto'], $pedido->codigo);
       }
       $pedido_id = $pedido->crearPedido();
-      var_dump(Token::IdActual($request));
       foreach ($parametros['producto'] as $key => $producto) {
         $item = Pedido::crearItemPedido($pedido_id, $producto, Token::IdActual($request));
       }

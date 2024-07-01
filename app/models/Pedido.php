@@ -83,7 +83,6 @@ class Pedido
         $consulta = $objAccesoDatos->prepararConsulta(" SELECT q.id as id_producto, q.nombre as producto, i.id_pedido as pedido FROM productos_pedidos as i
         LEFT JOIN productos as q ON q.id = i.id_producto
         WHERE q.tipo = :tipo AND i.estado = :estado;");
-        var_dump($rol);
         switch ($rol) {
             case "Cocinero":
                 $consulta->bindValue(':tipo', "Comida");
@@ -217,7 +216,6 @@ class Pedido
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
         $id = Pedido::obtenerIdSegunCodigo($nro_pedido);
-        var_dump($id);
         $consulta = $objAccesoDatos->prepararConsulta("UPDATE productos_pedidos
                                                         SET
                                                         estado = 'Listo',
