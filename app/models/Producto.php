@@ -110,4 +110,33 @@ class Producto
         return $productos;
     }
 
+    public static function verificarCompatibilidad($rol, $id_producto)
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT tipo FROM productos WHERE id = :id");
+        $consulta->bindValue(":id", $id_producto, PDO::PARAM_INT);
+        $consulta->execute();
+
+        $retorno = false;
+        switch (($consulta->fetch(PDO::FETCH_ASSOC))['tipo']) {
+            case "Comida":
+                if ($rol == "Cocinero") {
+                    $retorno = true;
+                }
+                break;
+            case "Cerveza":
+                if ($rol == "Cervecero") {
+                    $retorno = true;
+                }
+                break;
+            case "Trago":
+                if ($rol == "Bartender") {
+                    $retorno = true;
+                }
+                break;
+        }
+        var_dump($retorno);
+        return $retorno;
+    }
+
 }

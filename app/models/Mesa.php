@@ -61,13 +61,23 @@ class Mesa
     {
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
         $id = Mesa::obtenerIdSegunCodigo($nro_mesa);
-        $consulta = $objAccesoDatos->prepararConsulta("UPDATE mesas SET estado = :estado  WHERE id = :id AND estado != :estado1");
-        $consulta->bindValue(':id', $id['id'], PDO::PARAM_STR);
-        $consulta->bindValue(':estado', $estado, PDO::PARAM_STR);
-        $consulta->bindValue(':estado1', $estado, PDO::PARAM_STR);
+        $consulta = $objAccesoDatos->prepararConsulta("UPDATE mesas SET estado = :estado  WHERE id = :id");
+        $consulta->bindValue(':id', $id['id'], PDO::PARAM_INT);
+        $consulta->bindValue(':estado', $estado);
         $consulta->execute();
+
         return $consulta->rowCount();
     }
 
-
+    public static function GetMesaMasUsada()
+    {
+        $objAccesoDatos = AccesoDatos::obtenerInstancia();
+        $consulta = $objAccesoDatos->prepararConsulta("SELECT m.codigo FROM mesas as m
+                                                        JOIN pedidos as p ON m.id = p.mesa_id
+                                                        GROUP BY m.id, m.codigo
+                                                        ORDER BY COUNT(p.id) DESC
+                                                        LIMIT 1;");
+        $consulta->execute();
+        return $consulta->fetch(PDO::FETCH_ASSOC)['codigo'];
+    }
 }

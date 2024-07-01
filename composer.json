@@ -1,5 +1,6 @@
 {
   "require": {
+    "fpdf/fpdf": "^1.86",
     "firebase/php-jwt": "^6.10",
     "slim/slim": "^4.0",
     "slim/psr7": "^1.3"

@@ -4,8 +4,6 @@ require_once '../vendor/autoload.php';
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 
-
-
 class Token
 {
 
@@ -54,5 +52,30 @@ class Token
             $decoded = array("Estado" => "ERROR", "Mensaje" => "$mensaje");
         }
         return $decoded;
+    }
+
+    public static function RolActual($request)
+    {
+        $retorno = null;
+        $header = $request->getHeaderLine('Authorization');
+        $token = trim(explode("Bearer", $header)[1]);
+        $decode = Token::DecodificarToken($token);
+        if ($decode['Mensaje'] == "OK") {
+            $retorno = $decode['Payload']->tipo;
+        }
+        return $retorno;
+    }
+
+    public static function IdActual($request)
+    {
+        $retorno = null;
+        $header = $request->getHeaderLine('Authorization');
+        $token = trim(explode("Bearer", $header)[1]);
+        $decode = Token::DecodificarToken($token);
+        if ($decode['Mensaje'] == "OK") {
+            var_dump($decode);
+            $retorno = $decode['Payload']->id;
+        }
+        return $retorno;
     }
 }

@@ -13,116 +13,124 @@ class UserMiddleware
     public static function ValidarSocio(Request $request, RequestHandler $handler): Response
     {
 
-        if (isset($_SESSION['jwt_token'])) {
-            $payload = Token::DecodificarToken($_SESSION['jwt_token'])['Payload'];
+        $header = $request->getHeaderLine('Authorization');
+        $token = trim(explode("Bearer", $header)[1]);
 
-            if ($payload->tipo == "Socio") {
-                $res = $handler->handle($request);
-                return $res;
+        try {
+            $decoded = Token::DecodificarToken($token);
+            if ($decoded['Payload']->tipo == "Socio") {
+                $response = $handler->handle($request);
             } else {
-                $responseFactory = new \Slim\Psr7\Factory\ResponseFactory();
-                $response = $responseFactory->createResponse(401, 'No autorizado');
-                $response->getBody()->write("Solo para socios...");
-                return $response;
+                throw new Exception("Error en la decodificacion de TOKEN");
             }
-        } else {
-            $responseFactory = new \Slim\Psr7\Factory\ResponseFactory();
-            $response = $responseFactory->createResponse(401, 'No autorizado');
-            $response->getBody()->write("No estas logeado.");
-            return $response;
+        } catch (Exception $e) {
+            $response = new Response();
+            $payload = json_encode(array('mensaje' => $e->getMessage()));
+            $response->getBody()->write($payload);
         }
-
-
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
     public static function ValidarMozo(Request $request, RequestHandler $handler): Response
     {
-        if (isset($_SESSION['jwt_token'])) {
-            $payload = Token::DecodificarToken($_SESSION['jwt_token'])['Payload'];
-
-            if ($payload->tipo == "Socio" || $payload->tipo == "Mozo") {
-                $res = $handler->handle($request);
-                return $res;
+        $header = $request->getHeaderLine('Authorization');
+        $token = trim(explode("Bearer", $header)[1]);
+        $response = new Response();
+        //TODO: No hay excepcion para verificacion
+        try {
+            $decoded = Token::DecodificarToken($token);
+            if ($decoded['Payload']->tipo == "Mozo" || $decoded['Payload']->tipo == "Socio") {
+                var_dump($decoded);
+                $response = $handler->handle($request);
             } else {
-                $responseFactory = new \Slim\Psr7\Factory\ResponseFactory();
-                $response = $responseFactory->createResponse(401, 'No autorizado');
-                $response->getBody()->write("Solo para socios...");
-                return $response;
+                throw new Exception("Error en la decodificacion de TOKEN");
             }
-        } else {
-            $responseFactory = new \Slim\Psr7\Factory\ResponseFactory();
-            $response = $responseFactory->createResponse(401, 'No autorizado');
-            $response->getBody()->write("No estas logeado.");
-            return $response;
+        } catch (Exception $e) {
+
+            $payload = json_encode(array('mensaje' => $e->getMessage()));
+            $response->getBody()->write($payload);
         }
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
     public static function ValidarCervecero(Request $request, RequestHandler $handler): Response
     {
-        if (isset($_SESSION['jwt_token'])) {
-            $payload = Token::DecodificarToken($_SESSION['jwt_token'])['Payload'];
+        $header = $request->getHeaderLine('Authorization');
+        $token = trim(explode("Bearer", $header)[1]);
 
-            if ($payload->tipo == "Socio" || $payload->tipo == "Cervecero") {
-                $res = $handler->handle($request);
-                return $res;
+        try {
+            $decoded = Token::DecodificarToken($token);
+            if ($decoded['Payload']->tipo == "Cervecero" || $decoded['Payload']->tipo == "Socio") {
+                $response = $handler->handle($request);
             } else {
-                $responseFactory = new \Slim\Psr7\Factory\ResponseFactory();
-                $response = $responseFactory->createResponse(401, 'No autorizado');
-                $response->getBody()->write("Solo para socios...");
-                return $response;
+                throw new Exception("Error en la decodificacion de TOKEN");
             }
-        } else {
-            $responseFactory = new \Slim\Psr7\Factory\ResponseFactory();
-            $response = $responseFactory->createResponse(401, 'No autorizado');
-            $response->getBody()->write("No estas logeado.");
-            return $response;
+        } catch (Exception $e) {
+            $response = new Response();
+            $payload = json_encode(array('mensaje' => $e->getMessage()));
+            $response->getBody()->write($payload);
         }
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
     public static function ValidarBartender(Request $request, RequestHandler $handler): Response
     {
-        if (isset($_SESSION['jwt_token'])) {
-            $payload = Token::DecodificarToken($_SESSION['jwt_token'])['Payload'];
+        $header = $request->getHeaderLine('Authorization');
+        $token = trim(explode("Bearer", $header)[1]);
 
-            if ($payload->tipo == "Socio" || $payload->tipo == "Bartender") {
-                $res = $handler->handle($request);
-                return $res;
+        try {
+            $decoded = Token::DecodificarToken($token);
+            if ($decoded['Payload']->tipo == "Bartender" || $decoded['Payload']->tipo == "Socio") {
+                $response = $handler->handle($request);
             } else {
-                $responseFactory = new \Slim\Psr7\Factory\ResponseFactory();
-                $response = $responseFactory->createResponse(401, 'No autorizado');
-                $response->getBody()->write("Solo para socios...");
-                return $response;
+                throw new Exception("Error en la decodificacion de TOKEN");
             }
-        } else {
-            $responseFactory = new \Slim\Psr7\Factory\ResponseFactory();
-            $response = $responseFactory->createResponse(401, 'No autorizado');
-            $response->getBody()->write("No estas logeado.");
-            return $response;
+        } catch (Exception $e) {
+            $response = new Response();
+            $payload = json_encode(array('mensaje' => $e->getMessage()));
+            $response->getBody()->write($payload);
         }
-
-
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
     public static function ValidarCocinero(Request $request, RequestHandler $handler): Response
     {
-        if (isset($_SESSION['jwt_token'])) {
-            $payload = Token::DecodificarToken($_SESSION['jwt_token'])['Payload'];
+        $header = $request->getHeaderLine('Authorization');
+        $token = trim(explode("Bearer", $header)[1]);
 
-            if ($payload->tipo == "Socio" || $payload->tipo == "Cocinero") {
-                $res = $handler->handle($request);
-                return $res;
+        try {
+            $decoded = Token::DecodificarToken($token);
+            if ($decoded['Payload']->tipo == "Cocinero" || $decoded['Payload']->tipo == "Socio") {
+                $response = $handler->handle($request);
             } else {
-                $responseFactory = new \Slim\Psr7\Factory\ResponseFactory();
-                $response = $responseFactory->createResponse(401, 'No autorizado');
-                $response->getBody()->write("Solo para socios...");
-                return $response;
+                throw new Exception("Error en la decodificacion de TOKEN");
             }
-        } else {
-            $responseFactory = new \Slim\Psr7\Factory\ResponseFactory();
-            $response = $responseFactory->createResponse(401, 'No autorizado');
-            $response->getBody()->write("No estas logeado.");
-            return $response;
+        } catch (Exception $e) {
+            $response = new Response();
+            $payload = json_encode(array('mensaje' => $e->getMessage()));
+            $response->getBody()->write($payload);
         }
+        return $response->withHeader('Content-Type', 'application/json');
+    }
+
+    public static function verificarToken(Request $request, RequestHandler $handler): Response
+    {
+        $header = $request->getHeaderLine('Authorization');
+        $token = trim(explode("Bearer", $header)[1]);
+
+        try {
+            $decoded = Token::DecodificarToken($token);
+            if ($decoded['Mensaje'] == "OK") {
+                $response = $handler->handle($request);
+            } else {
+                throw new Exception("Error en la decodificacion de TOKEN");
+            }
+        } catch (Exception $e) {
+            $response = new Response();
+            $payload = json_encode(array('mensaje' => $e->getMessage()));
+            $response->getBody()->write($payload);
+        }
+        return $response->withHeader('Content-Type', 'application/json');
     }
 
 }

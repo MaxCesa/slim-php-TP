@@ -42,6 +42,19 @@ class LoggerController extends Logger
   public static function LogOut($request, $response, $args)
   {
     $_SESSION[] = array();
+    if (ini_get("session.use_cookies")) {
+      $params = session_get_cookie_params();
+      setcookie(
+        session_name(),
+        '',
+        time() - 42000,
+        $params["path"],
+        $params["domain"],
+        $params["secure"],
+        $params["httponly"]
+      );
+    }
+    session_destroy();
     $payload = json_encode(array("mensaje" => "Deslogueado"));
     $response->getBody()->write($payload);
     return $response
