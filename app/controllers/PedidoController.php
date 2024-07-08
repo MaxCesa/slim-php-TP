@@ -8,35 +8,26 @@ class PedidoController extends Pedido implements IApiUsable
   {
     $parametros = $request->getParsedBody();
 
-    if (
-      isset($parametros['producto']) && $parametros['producto'] != "" &&
-      isset($parametros['cliente']) && $parametros['cliente'] != "" &&
-      isset($parametros['mesa']) && $parametros['mesa'] != ""
-    ) {
-      $pedido = new Pedido();
-      $pedido->cliente = $parametros['cliente'];
-      $mesa_id = Mesa::obtenerIdSegunCodigo($parametros['mesa']);
-      $pedido->mesa_id = $mesa_id['id'];
-      $pedido->codigo = substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 5)), 0, 5);
-      if (isset($_FILES['foto'])) {
-        $pedido->foto = $_FILES['foto']['name'];
-        Pedido::SubirFotoPedido($_FILES['foto'], $pedido->codigo);
-      }
-      $pedido_id = $pedido->crearPedido();
-      foreach ($parametros['producto'] as $key => $producto) {
-        $item = Pedido::crearItemPedido($pedido_id, $producto, Token::IdActual($request));
-      }
-      Mesa::cambiarEstadoMesa($parametros['mesa'], 1);
-      $payload = json_encode(array("mensaje" => "Pedido creado con exito, Su código de pedido es: " . $pedido->codigo));
-      $response->getBody()->write($payload);
-      return $response
-        ->withHeader('Content-Type', 'application/json');
-    } else {
-      $payload = json_encode(array("mensaje" => "Ocurrio un error al crear el pedido"));
-      $response->getBody()->write($payload);
-      return $response
-        ->withHeader('Content-Type', 'application/json');
+
+    $pedido = new Pedido();
+    $pedido->cliente = $parametros['cliente'];
+    $mesa_id = Mesa::obtenerIdSegunCodigo($parametros['mesa']);
+    $pedido->mesa_id = $mesa_id['id'];
+    $pedido->codigo = substr(str_shuffle(str_repeat("0123456789abcdefghijklmnopqrstuvwxyz", 5)), 0, 5);
+    if (isset($_FILES['foto'])) {
+      $pedido->foto = $_FILES['foto']['name'];
+      Pedido::SubirFotoPedido($_FILES['foto'], $pedido->codigo);
     }
+    $pedido_id = $pedido->crearPedido();
+    foreach ($parametros['producto'] as $key => $producto) {
+      $item = Pedido::crearItemPedido($pedido_id, $producto, Token::IdActual($request));
+    }
+    Mesa::cambiarEstadoMesa($parametros['mesa'], 1);
+    $payload = json_encode(array("mensaje" => "Pedido creado con exito, Su código de pedido es: " . $pedido->codigo));
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+
   }
 
   public function TraerTodos($request, $response, $args)
@@ -86,40 +77,31 @@ class PedidoController extends Pedido implements IApiUsable
   public static function IniciarPreparacionProducto($request, $response, $args)
   {
     $parametros = $request->getParsedBody();
-    if (isset($parametros['nro_pedido']) && isset($parametros['item_id']) && isset($parametros['prep_time'])) {
-      $retorno = Pedido::IniciarPreparacion($parametros['nro_pedido'], $parametros['item_id'], $parametros['prep_time'], Token::RolActual($request), Token::IdActual($request));
-      if ($retorno > 0) {
-        $payload = json_encode(array("mensaje" => "Estado de pedido actualizado"));
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-      } else {
-        $payload = json_encode(array("mensaje" => "Error iniciando pedido"));
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-      }
+    $retorno = Pedido::IniciarPreparacion($parametros['nro_pedido'], $parametros['item_id'], $parametros['prep_time'], Token::RolActual($request), Token::IdActual($request));
+    if ($retorno > 0) {
+      $payload = json_encode(array("mensaje" => "Estado de pedido actualizado"));
+      $response->getBody()->write($payload);
+      return $response
+        ->withHeader('Content-Type', 'application/json');
+    } else {
+      $payload = json_encode(array("mensaje" => "Error iniciando pedido"));
+      $response->getBody()->write($payload);
+      return $response
+        ->withHeader('Content-Type', 'application/json');
     }
   }
 
   public static function EsperaPedido($request, $response, $args)
   {
 
-    if (isset($_GET['nro_pedido'])) {
-      $demora = Pedido::obtenerEsperaPedido($_GET['nro_pedido']);
-      if ($demora > 0) {
-        $payload = json_encode(array("mensaje" => "Su pedido tardara {$demora} minutos"));
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-      } else {
-        $payload = json_encode(array("mensaje" => "Su pedido aun no ha sido procesado."));
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-      }
+    $demora = Pedido::obtenerEsperaPedido($_GET['nro_pedido']);
+    if ($demora > 0) {
+      $payload = json_encode(array("mensaje" => "Su pedido tardara {$demora} minutos"));
+      $response->getBody()->write($payload);
+      return $response
+        ->withHeader('Content-Type', 'application/json');
     } else {
-      $payload = json_encode(array("mensaje" => "Parametros mal pasados."));
+      $payload = json_encode(array("mensaje" => "Su pedido aun no ha sido procesado."));
       $response->getBody()->write($payload);
       return $response
         ->withHeader('Content-Type', 'application/json');
@@ -129,40 +111,28 @@ class PedidoController extends Pedido implements IApiUsable
   public static function DemoraPedido($request, $response, $args)
   {
 
-    if (isset($_GET['nro_pedido'])) {
-      $demora = Pedido::obtenerDemoraPedido($_GET['nro_pedido']);
-      if ($demora > 0) {
-        $payload = json_encode(array("mensaje" => "Su pedido esta {$demora} minutos tarde"));
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-      } else {
-        $payload = json_encode(array("mensaje" => "Su pedido sigue en proceso."));
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-      }
+
+    $demora = Pedido::obtenerDemoraPedido($_GET['nro_pedido']);
+    if ($demora > 0) {
+      $payload = json_encode(array("mensaje" => "Su pedido esta {$demora} minutos tarde"));
+      $response->getBody()->write($payload);
+      return $response
+        ->withHeader('Content-Type', 'application/json');
     } else {
-      $payload = json_encode(array("mensaje" => "Parametros mal pasados."));
+      $payload = json_encode(array("mensaje" => "Su pedido sigue en proceso."));
       $response->getBody()->write($payload);
       return $response
         ->withHeader('Content-Type', 'application/json');
     }
+
   }
 
   public static function ItemListo($request, $response, $args)
   {
     $parametros = $request->getParsedBody();
-    if (isset($parametros['nro_pedido']) && isset($parametros['item_id'])) {
-      $retorno = Pedido::SetItemListo($parametros['nro_pedido'], $parametros['item_id'], Token::IdActual($request));
-      if ($retorno > 0) {
-        $payload = json_encode(array("mensaje" => "Estado de pedido actualizado"));
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-      }
-    } else {
-      $payload = json_encode(array("mensaje" => "Error finalizando pedido"));
+    $retorno = Pedido::SetItemListo($parametros['nro_pedido'], $parametros['item_id'], Token::IdActual($request));
+    if ($retorno > 0) {
+      $payload = json_encode(array("mensaje" => "Estado de pedido actualizado"));
       $response->getBody()->write($payload);
       return $response
         ->withHeader('Content-Type', 'application/json');
@@ -204,21 +174,15 @@ class PedidoController extends Pedido implements IApiUsable
 
   public static function ObtenerCuenta($request, $response, $args)
   {
-    if (isset($_GET['nro_pedido'])) {
-      $resultado = Pedido::CalcularCuenta($_GET['nro_pedido']);
-      if ($resultado > 0) {
-        $payload = json_encode(array("Mensaje" => "El total de la cuenta es de {$resultado}"));
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-      } else {
-        $payload = json_encode(array("mensaje" => "Hubo un problema calculando el total"));
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-      }
+
+    $resultado = Pedido::CalcularCuenta($_GET['nro_pedido']);
+    if ($resultado > 0) {
+      $payload = json_encode(array("Mensaje" => "El total de la cuenta es de {$resultado}"));
+      $response->getBody()->write($payload);
+      return $response
+        ->withHeader('Content-Type', 'application/json');
     } else {
-      $payload = json_encode(array("mensaje" => "Parametros mal pasados"));
+      $payload = json_encode(array("mensaje" => "Hubo un problema calculando el total"));
       $response->getBody()->write($payload);
       return $response
         ->withHeader('Content-Type', 'application/json');

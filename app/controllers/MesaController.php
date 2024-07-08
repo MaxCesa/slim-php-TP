@@ -31,20 +31,14 @@ class MesaController
     $factory = new ResponseFactory();
     $response = $factory->createResponse();
     $parametros = $request->getParsedBody();
-    if (isset($parametros['codigo'])) {
-      $resultado = Mesa::cambiarEstadoMesa($parametros['codigo'], "Con cliente comiendo");
-      if ($resultado > 0) {
-        $response = $handler->handle($request);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-      } else {
-        $payload = json_encode(array("Mensaje" => "No se pudo entregar la comida."));
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-      }
+
+    $resultado = Mesa::cambiarEstadoMesa($parametros['codigo'], "Con cliente comiendo");
+    if ($resultado > 0) {
+      $response = $handler->handle($request);
+      return $response
+        ->withHeader('Content-Type', 'application/json');
     } else {
-      $payload = json_encode(array("Mensaje" => "Parametros incorrectos"));
+      $payload = json_encode(array("Mensaje" => "No se pudo entregar la comida."));
       $response->getBody()->write($payload);
       return $response
         ->withHeader('Content-Type', 'application/json');
@@ -55,25 +49,20 @@ class MesaController
     $factory = new ResponseFactory();
     $response = $factory->createResponse();
     $parametros = $request->getParsedBody();
-    if (isset($parametros['codigo'])) {
-      $resultado = Mesa::cambiarEstadoMesa($parametros['codigo'], "Cerrada");
-      if ($resultado > 0) {
-        $payload = json_encode(array("Mensaje" => "Mesa Cerrada."));
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-      } else {
-        $payload = json_encode(array("Mensaje" => "No se pudo cerrar la mesa."));
-        $response->getBody()->write($payload);
-        return $response
-          ->withHeader('Content-Type', 'application/json');
-      }
+
+    $resultado = Mesa::cambiarEstadoMesa($parametros['codigo'], "Cerrada");
+    if ($resultado > 0) {
+      $payload = json_encode(array("Mensaje" => "Mesa Cerrada."));
+      $response->getBody()->write($payload);
+      return $response
+        ->withHeader('Content-Type', 'application/json');
     } else {
-      $payload = json_encode(array("Mensaje" => "Parametros incorrectos"));
+      $payload = json_encode(array("Mensaje" => "No se pudo cerrar la mesa."));
       $response->getBody()->write($payload);
       return $response
         ->withHeader('Content-Type', 'application/json');
     }
+
   }
 
   public function MesaMasUsada($request, $response, $args)

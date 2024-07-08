@@ -1,5 +1,7 @@
 <?php
 
+require_once "PDF.php";
+
 class Producto
 {
     public $id;
@@ -136,6 +138,16 @@ class Producto
                 break;
         }
         return $retorno;
+    }
+
+    public static function ProductosAPDF()
+    {
+        $productos = Producto::obtenerTodos();
+        $pdf = new PDF();
+        $pdf->AddPage();
+        $pdf->SetFont('Arial', 'B', 11);
+        $pdf->ProductosTable(array_keys(get_object_vars($productos[0])), $productos);
+        $pdf->Output();
     }
 
 }

@@ -8,26 +8,17 @@ class ProductoController extends Producto
   {
     $parametros = $request->getParsedBody();
 
-    if (
-      isset($parametros['nombre']) && $parametros['nombre'] != "" &&
-      isset($parametros['precio']) && $parametros['precio'] != "" &&
-      ($parametros['tipo'] == "Comida" || $parametros['tipo'] == "Cerveza" || $parametros['tipo'] = "Trago")
-    ) {
-      $producto = new Producto();
-      $producto = $parametros['nombre'];
-      $producto = $parametros['precio'];
-      $producto = $parametros['tipo'];
-      $producto->crearProducto();
-      $payload = json_encode(array("mensaje" => "Producto creado con exito"));
-      $response->getBody()->write($payload);
-      return $response
-        ->withHeader('Content-Type', 'application/json');
-    } else {
-      $payload = json_encode(array("mensaje" => "Ocurrio un error al crear el producto"));
-      $response->getBody()->write($payload);
-      return $response
-        ->withHeader('Content-Type', 'application/json');
-    }
+
+    $producto = new Producto();
+    $producto = $parametros['nombre'];
+    $producto = $parametros['precio'];
+    $producto = $parametros['tipo'];
+    $producto->crearProducto();
+    $payload = json_encode(array("mensaje" => "Producto creado con exito"));
+    $response->getBody()->write($payload);
+    return $response
+      ->withHeader('Content-Type', 'application/json');
+
   }
 
   public function TraerTodos($request, $response, $args)
@@ -58,6 +49,11 @@ class ProductoController extends Producto
     $response->getBody()->write($payload);
     return $response
       ->withHeader('Content-Type', 'application/json');
+  }
+
+  public function DescargarPDF($request, $response, $args)
+  {
+    Producto::ProductosAPDF();
   }
 
 }

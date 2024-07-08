@@ -182,7 +182,6 @@ class Pedido
 
     public static function obtenerEsperaPedido($nro_pedido)
     {
-        //TODO: ARREGLA ESTE BIEN
         $objAccesoDatos = AccesoDatos::obtenerInstancia();
         $id = Pedido::obtenerIdSegunCodigo($nro_pedido);
         $consulta = $objAccesoDatos->prepararConsulta("SELECT MAX(tiempo_estimado) as Espera FROM `productos_pedidos`
